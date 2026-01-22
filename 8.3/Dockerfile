@@ -4,4 +4,6 @@ FROM lorisleiva/laravel-docker:8.3
 RUN apk add --no-cache \
     postgresql-client
 
-RUN docker-php-ext-install ftp
+RUN apk add --no-cache --virtual .build-deps openssl-dev \
+  && docker-php-ext-install ftp \
+  && apk del .build-deps
